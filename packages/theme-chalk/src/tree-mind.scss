@@ -1,0 +1,6 @@
+@import "./mixins/mixin.scss";
+
+@include b(tree-mind) {
+  position: relative;
+  overflow: hidden;
+}

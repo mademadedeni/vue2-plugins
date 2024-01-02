@@ -1,0 +1,82 @@
+{
+  "name": "vue2-plugins",
+  "version": "0.0.1",
+  "description": "A Component Library for Vue.js.",
+  "main": "lib/vue2-plugins.common.js",
+  "files": [
+    "lib",
+    "src",
+    "packages"
+  ],
+  "scripts": {
+    "build:file": "node build/bin/build-entry.js",
+    "build:theme": "node build/bin/gen-cssfile.js && gulp build --gulpfile packages/theme-chalk/gulpfile.js && cp-cli packages/theme-chalk/lib lib/theme-chalk",
+    "build:utils": "cross-env BABEL_ENV=utils babel src --out-dir lib --ignore src/index.js",
+    "build:umd": "node build/bin/build-locale.js",
+    "clean": "rimraf lib && rimraf packages/*/lib",
+    "lint": "eslint src/**/* packages/**/* build/**/* --quiet",
+    "dist": "npm run clean && npm run build:file && npm run lint && webpack --config build/webpack.conf.js && webpack --config build/webpack.common.js && webpack --config build/webpack.component.js",
+    "build:conf": "webpack --config build/webpack.conf.js",
+    "build:common": "webpack --config build/webpack.common.js",
+    "build:component": "webpack --config build/webpack.component.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "vue"
+  ],
+  "unpkg": "lib/index.js",
+  "author": "liu",
+  "license": "ISC",
+  "peerDependencies": {
+    "vue": "^2.5.21"
+  },
+  "dependencies": {
+    "babel-helper-vue-jsx-merge-props": "^2.0.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-istanbul": "^4.1.1",
+    "babel-plugin-module-resolver": "^2.2.0",
+    "babel-plugin-syntax-jsx": "^6.18.0",
+    "babel-plugin-transform-vue-jsx": "^3.7.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-2": "^6.24.1",
+    "babel-regenerator-runtime": "^6.5.0",
+    "copy-webpack-plugin": "^5.0.0",
+    "cp-cli": "^1.1.2",
+    "cross-env": "^7.0.3",
+    "css-loader": "^2.1.0",
+    "eslint": "4.18.2",
+    "eslint-config-elemefe": "0.1.1",
+    "eslint-loader": "^2.0.0",
+    "eslint-plugin-html": "^4.0.1",
+    "eslint-plugin-json": "^1.2.0",
+    "file-loader": "^1.1.11",
+    "file-save": "^0.2.0",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^6.1.0",
+    "gulp-cssmin": "^0.2.0",
+    "gulp-sass": "^4.1.1",
+    "html-webpack-plugin": "^3.2.0",
+    "json-loader": "^0.5.7",
+    "json-templater": "^1.2.0",
+    "progress-bar-webpack-plugin": "^2.1.0",
+    "sass": "^1.69.5",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "uppercamelcase": "^3.0.0",
+    "url-loader": "^4.1.1",
+    "vue": "2.5.21",
+    "vue-loader": "^15.7.0",
+    "vue-router": "^3.0.1",
+    "vue-template-compiler": "2.5.21",
+    "vue-template-es2015-compiler": "^1.6.0",
+    "webpack": "^4.14.0",
+    "webpack-cli": "^3.0.8",
+    "webpack-dev-server": "^3.1.11",
+    "webpack-node-externals": "^1.7.2"
+  }
+}
