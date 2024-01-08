@@ -1,1 +1,1 @@
-vue2组件
+vue2-plugins
