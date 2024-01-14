@@ -15,7 +15,7 @@ module.exports = {
     filename: 'vue2-plugins.common.js',
     chunkFilename: '[id].js',
     libraryExport: 'default',
-    library: 'VUE2PLUGINS',
+    library: 'Vue2Plugins',
     libraryTarget: 'commonjs2'
   },
   resolve: {
