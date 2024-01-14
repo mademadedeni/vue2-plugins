@@ -15,11 +15,11 @@
     "build:umd": "node build/bin/build-locale.js",
     "clean": "rimraf lib && rimraf packages/*/lib",
     "lint": "eslint src/**/* packages/**/* build/**/* --quiet",
-    "dist": "npm run clean && npm run build:file && npm run lint && webpack --config build/webpack.conf.js && webpack --config build/webpack.common.js && webpack --config build/webpack.component.js",
+    "dist": "npm run clean && npm run build:file && npm run lint && webpack --config build/webpack.conf.js && webpack --config build/webpack.common.js && webpack --config build/webpack.component.js && npm run build:utils && npm run build:theme",
     "build:conf": "webpack --config build/webpack.conf.js",
     "build:common": "webpack --config build/webpack.common.js",
     "build:component": "webpack --config build/webpack.component.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "npm run build:file && cross-env NODE_ENV=development webpack-dev-server --config build/webpack.demo.js"
   },
   "keywords": [
     "vue"
@@ -63,10 +63,14 @@
     "html-webpack-plugin": "^3.2.0",
     "json-loader": "^0.5.7",
     "json-templater": "^1.2.0",
+    "launch-editor-middleware": "^2.6.1",
+    "mini-css-extract-plugin": "^2.7.7",
+    "optimize-css-assets-webpack-plugin": "^6.0.1",
     "progress-bar-webpack-plugin": "^2.1.0",
     "sass": "^1.69.5",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
+    "uglifyjs-webpack-plugin": "^2.2.0",
     "uppercamelcase": "^3.0.0",
     "url-loader": "^4.1.1",
     "vue": "2.5.21",

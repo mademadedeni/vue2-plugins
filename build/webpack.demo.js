@@ -1,29 +1,26 @@
 const path = require('path');
 const webpack = require('webpack');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+// const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+// const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+// const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const launchEditorMiddleware = require('launch-editor-middleware');
 
 const config = require('./config');
 
-const isProd = process.env.NODE_ENV === 'production';
-const isPlay = !!process.env.PLAY_ENV;
+// const isProd = process.env.NODE_ENV === 'production';
 
 const webpackConfig = {
   mode: process.env.NODE_ENV,
-  entry: isProd ? {
-    docs: './examples/entry.js'
-  } : (isPlay ? './examples/play.js' : './examples/entry.js'),
+  entry: './examples/entry.js',
   output: {
     path: path.resolve(process.cwd(), './examples/element-ui/'),
-    publicPath: process.env.CI_ENV || '',
+    publicPath: '',
     filename: '[name].[hash:7].js',
-    chunkFilename: isProd ? '[name].[hash:7].js' : '[name].js'
+    chunkFilename: '[name].js'
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
@@ -77,25 +74,9 @@ const webpackConfig = {
       {
         test: /\.(scss|css)$/,
         use: [
-          isProd ? MiniCssExtractPlugin.loader : 'style-loader',
+          'style-loader',
           'css-loader',
           'sass-loader'
-        ]
-      },
-      {
-        test: /\.md$/,
-        use: [
-          {
-            loader: 'vue-loader',
-            options: {
-              compilerOptions: {
-                preserveWhitespace: false
-              }
-            }
-          },
-          {
-            loader: path.resolve(__dirname, './md-loader/index.js')
-          }
         ]
       },
       {
@@ -112,18 +93,17 @@ const webpackConfig = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
-      template: './examples/index.tpl',
-      filename: './index.html',
-      favicon: './examples/favicon.ico'
+      template: './public/index.html',
+      filename: './index.html'
     }),
-    new CopyWebpackPlugin([
-      { from: 'examples/versions.json' }
-    ]),
+    // new CopyWebpackPlugin([
+    //   { from: 'examples/versions.json' }
+    // ]),
     new ProgressBarPlugin(),
     new VueLoaderPlugin(),
-    new webpack.DefinePlugin({
-      'process.env.FAAS_ENV': JSON.stringify(process.env.FAAS_ENV)
-    }),
+    // new webpack.DefinePlugin({
+    //   'process.env.FAAS_ENV': JSON.stringify(process.env.FAAS_ENV)
+    // }),
     new webpack.LoaderOptionsPlugin({
       vue: {
         compilerOptions: {
@@ -137,37 +117,5 @@ const webpackConfig = {
   },
   devtool: '#eval-source-map'
 };
-
-if (isProd) {
-  webpackConfig.externals = {
-    vue: 'Vue',
-    'vue-router': 'VueRouter',
-    'highlight.js': 'hljs'
-  };
-  webpackConfig.plugins.push(
-    new MiniCssExtractPlugin({
-      filename: '[name].[contenthash:7].css'
-    })
-  );
-  webpackConfig.optimization.minimizer.push(
-    new UglifyJsPlugin({
-      cache: true,
-      parallel: true,
-      sourceMap: false
-    }),
-    new OptimizeCSSAssetsPlugin({})
-  );
-  // https://webpack.js.org/configuration/optimization/#optimizationsplitchunks
-  webpackConfig.optimization.splitChunks = {
-    cacheGroups: {
-      vendor: {
-        test: /\/src\//,
-        name: 'element-ui',
-        chunks: 'all'
-      }
-    }
-  };
-  webpackConfig.devtool = false;
-}
 
 module.exports = webpackConfig;
