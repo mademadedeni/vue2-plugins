@@ -1,5 +1,5 @@
 {
-  "name": "vue2-plugins",
+  "name": "@liujianzeng/vue2-plugins",
   "version": "0.0.1",
   "description": "A Component Library for Vue.js.",
   "main": "lib/vue2-plugins.common.js",
@@ -19,7 +19,8 @@
     "build:conf": "webpack --config build/webpack.conf.js",
     "build:common": "webpack --config build/webpack.common.js",
     "build:component": "webpack --config build/webpack.component.js",
-    "dev": "npm run build:file && cross-env NODE_ENV=development webpack-dev-server --config build/webpack.demo.js"
+    "dev": "npm run build:file && cross-env NODE_ENV=development webpack-dev-server --config build/webpack.demo.js",
+    "pub": "npm publish public"
   },
   "repository": {
     "type": "git",
