@@ -20,7 +20,7 @@
     "build:common": "webpack --config build/webpack.common.js",
     "build:component": "webpack --config build/webpack.component.js",
     "dev": "npm run build:file && cross-env NODE_ENV=development webpack-dev-server --config build/webpack.demo.js",
-    "pub": "npm publish public"
+    "pub": "npm publish --access=public"
   },
   "repository": {
     "type": "git",
