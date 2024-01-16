@@ -1,0 +1,57 @@
+@import "./mixins/mixin.scss";
+
+@include b(tree-mind) {
+  margin: 20px 20px;
+  position: relative;
+  overflow: hidden;
+  background-color: #061539;
+
+  &.vp-move:hover {
+    cursor: move;
+  }
+
+  .vp-canvas {
+    position: absolute;
+    background-color: #061539;
+  }
+}
+
+@include b(node) {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  font-size: 14px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .vp-node-content {
+    position: relative;
+    box-sizing: border-box;
+    width: 200px;
+    height: 30px;
+    margin-right: 40px;
+    text-align: center;
+    background-color: #061539;
+    border: 2px solid #3a70e3;
+    border-radius: 20px;
+    user-select: none;
+    padding: 0 10px;
+    box-sizing: border-box;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 28px;
+    box-shadow: inset 0px 0px 20px 0px rgba(17, 40, 255, 0.66);
+
+    .vp-name {
+      display: inline-block;
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}
