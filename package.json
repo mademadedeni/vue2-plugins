@@ -1,6 +1,6 @@
 {
   "name": "@liujianzeng/vue2-plugins",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A Component Library for Vue.js.",
   "main": "lib/vue2-plugins.common.js",
   "files": [
